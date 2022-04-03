@@ -1,0 +1,12 @@
+<app-component-header></app-component-header>
+
+<div class="row">
+  <div class="products col-md-7">
+    <div class="list-group-item" *ngFor="let product of products">
+      <app-component-product [product]="product"></app-component-product>
+    </div>
+  </div>
+  <div class="order col-md-5">
+    <app-component-order></app-component-order>
+  </div>
+</div>
