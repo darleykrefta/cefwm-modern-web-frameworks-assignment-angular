@@ -1,0 +1,34 @@
+<div class="container mt-5">
+  <h3 class="m-4">Order</h3>
+
+  <div class="card bg-light m-4">
+    <div class="card-body">
+      <div>
+        <h5 class="card-title">Products</h5>
+      </div>
+      <div class="row">
+        <div class="col-6 text-muted fw-bolder">Name</div>
+        <div class="col-3 text-muted fw-bolder">Quantity</div>
+        <div class="col-3 text-muted fw-bolder text-end">Price</div>
+      </div>
+      <div class="row" *ngFor="let item of order.items">
+        <div class="col-6">{{ item.product.name }}</div>
+        <div class="col-3">{{ item.quantity }}</div>
+        <div class="col-3 text-end">{{ item.total | currency: "BRL" }}</div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col-10 text-end"><h4 class="text-bolder">Total</h4></div>
+        <div class="col-2 text-end">{{ order.total | currency: "BRL" }}</div>
+      </div>
+      <div class="row">
+        <div class="col-12 d-flex justify-content-end">
+          <button class="btn btn-outline-success" (click)="create()">
+            <span class="fa fa-money"></span>
+            Finish order
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

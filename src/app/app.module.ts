@@ -4,20 +4,25 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header';
-import { ProductComponent } from './components/product';
-import { OrderComponent } from './components/order';
 import { ApiService } from './services/api.service';
 import { OrderService } from './services/order.service';
 import { ProductService } from './services/product.service';
+
+import { ProductsComponent } from './modules/products';
+import { OrderComponent } from './modules/order';
+
+import { AppRoutingModule } from './app-routing.module';
+import { CardProductComponent } from './components/card-product';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    ProductComponent,
+    ProductsComponent,
     OrderComponent,
+    CardProductComponent,
   ],
-  imports: [BrowserModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [ApiService, OrderService, ProductService],
   bootstrap: [AppComponent],
 })
