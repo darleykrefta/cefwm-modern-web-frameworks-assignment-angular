@@ -26,6 +26,10 @@ export class OrderService {
     }
 
     this.order.total += Number(product.price);
+    this.order.totalItems = this.order.items.reduce(
+      (prev, cur) => prev + cur.quantity,
+      0
+    );
   }
 
   removeItem(productId: string): void {
@@ -41,6 +45,10 @@ export class OrderService {
       }
 
       this.order.total -= item.product.price;
+      this.order.totalItems = this.order.items.reduce(
+        (prev, cur) => prev + cur.quantity,
+        0
+      );
 
       if (item.quantity === 0) {
         this.order.items.splice(this.order.items.indexOf(item), 1);
