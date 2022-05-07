@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { OrderItemModel } from 'src/app/models/order.item.model';
 import { OrderModel } from 'src/app/models/order.model';
 import { OrderService } from 'src/app/services/order.service';
 
@@ -21,7 +22,15 @@ export class OrderComponent implements OnInit {
     }
   }
 
-  create() {
-    this.orderService.createOrder(this.order.items);
+  createOrder() {
+    this.orderService.createOrder().subscribe({
+      next: (order: OrderModel) => {
+        this.orderService.createOrderItems(order, this.order.items).subscribe({
+          next: (orderItems: OrderItemModel[]) => {
+            this.order.items = orderItems;
+          },
+        });
+      },
+    });
   }
 }

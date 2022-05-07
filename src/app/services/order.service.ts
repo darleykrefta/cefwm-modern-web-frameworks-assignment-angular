@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { OrderItemModel } from '../models/order.item.model';
 import { OrderModel } from '../models/order.model';
 import { ProductModel } from '../models/product.model';
@@ -56,15 +57,14 @@ export class OrderService {
     }
   }
 
-  createOrder(items: OrderItemModel[]): void {
-    this.apiService.postOrder().subscribe({
-      next: (order: OrderModel) => {
-        this.apiService.postOrderItems(order.uuid, items).subscribe({
-          next: (orderItems: OrderItemModel[]) => {
-            this.order.items = orderItems;
-          },
-        });
-      },
-    });
+  createOrder(): Observable<OrderModel> {
+    return this.apiService.postOrder();
+  }
+
+  createOrderItems(
+    order: OrderModel,
+    items: OrderItemModel[]
+  ): Observable<OrderItemModel[]> {
+    return this.apiService.postOrderItems(order.uuid, items);
   }
 }
