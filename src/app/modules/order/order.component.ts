@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { OrderItemModel } from 'src/app/models/order.item.model';
+import { Router } from '@angular/router';
 import { OrderModel } from 'src/app/models/order.model';
 import { OrderService } from 'src/app/services/order.service';
 
@@ -11,7 +11,7 @@ import { OrderService } from 'src/app/services/order.service';
 export class OrderComponent implements OnInit {
   public order: OrderModel;
 
-  constructor(private orderService: OrderService) {
+  constructor(private orderService: OrderService, private router: Router) {
     this.order = orderService.order;
   }
 
@@ -26,8 +26,9 @@ export class OrderComponent implements OnInit {
     this.orderService.createOrder().subscribe({
       next: (order: OrderModel) => {
         this.orderService.createOrderItems(order, this.order.items).subscribe({
-          next: (orderItems: OrderItemModel[]) => {
-            this.order.items = orderItems;
+          next: () => {
+            this.orderService.order = new OrderModel();
+            this.router.navigate(['/products']);
           },
         });
       },
