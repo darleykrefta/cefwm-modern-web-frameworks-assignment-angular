@@ -5,7 +5,7 @@ export class OrderModel {
   public client: string;
   public items: OrderItemModel[];
   public totalItems?: number;
-  public total?: number;
+  public total: number;
 
   constructor(
     uuid: string = '',

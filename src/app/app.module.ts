@@ -13,6 +13,7 @@ import { OrderComponent } from './modules/order';
 
 import { AppRoutingModule } from './app-routing.module';
 import { CardProductComponent } from './components/card-product';
+import { MoneyPipe } from './transforms/money.pipe';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { CardProductComponent } from './components/card-product';
     ProductsComponent,
     OrderComponent,
     CardProductComponent,
+    MoneyPipe,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [ApiService, OrderService, ProductService],
