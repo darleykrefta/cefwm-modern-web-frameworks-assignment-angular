@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ProductModel } from 'src/app/models/product.model';
 import { OrderService } from 'src/app/services/order.service';
 import { ProductService } from 'src/app/services/product.service';
@@ -9,14 +9,19 @@ import { ProductService } from 'src/app/services/product.service';
   styleUrls: ['./products.component.css'],
 })
 export class ProductsComponent {
-  constructor(
-    private productService: ProductService,
-    private orderService: OrderService
-  ) {
-    this.products = productService.products;
+  products?: ProductModel[];
+
+  constructor(private productService: ProductService) {}
+
+  ngOnInit(): void {
+    this.getAllProducts();
   }
 
-  public products: ProductModel[];
-
-  ngOnInit(): void {}
+  getAllProducts(): void {
+    this.productService.getProducts().subscribe({
+      next: (data: ProductModel[]) => {
+        this.products = data;
+      },
+    });
+  }
 }

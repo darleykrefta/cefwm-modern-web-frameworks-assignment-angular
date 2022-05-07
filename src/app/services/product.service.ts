@@ -1,16 +1,13 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { ProductModel } from '../models/product.model';
 import { ApiService } from './api.service';
 
 @Injectable()
 export class ProductService {
-  public products: ProductModel[] = [];
+  constructor(private apiService: ApiService) {}
 
-  constructor(private apiService: ApiService) {
-    apiService.getProducts().subscribe({
-      next: (products: ProductModel[]) => {
-        this.products.push(...products);
-      },
-    });
+  getProducts(): Observable<ProductModel[]> {
+    return this.apiService.getProducts();
   }
 }

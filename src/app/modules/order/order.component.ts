@@ -22,7 +22,6 @@ export class OrderComponent implements OnInit {
   }
 
   create() {
-    console.log('caiu aqui nessa merda');
     this.orderService.createOrder(this.order.items);
   }
 }
